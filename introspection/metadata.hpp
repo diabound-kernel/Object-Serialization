@@ -34,7 +34,8 @@ namespace metadata
     concept CanGetFields = requires(Object obj) { obj.getFields(); };
 
     template<CanGetFields Object, typename Func>
-    void forEachField(Object& obj, Func&& func) {
+    void forEachField(Object& obj, Func&& func)
+    {
         std::apply([&func](auto... fields)
         {
             (func(fields), ...);
