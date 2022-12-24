@@ -5,7 +5,7 @@ Dependencies:
   * C++20
   * CMake
   * {fmt}
-  * nlohman::json
+  * nlohmann::json
   * yaml-cpp
 
 Install:
