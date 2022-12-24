@@ -21,5 +21,3 @@ From the source directory, run
   and then the usual
 
     make
-  
-    make install
