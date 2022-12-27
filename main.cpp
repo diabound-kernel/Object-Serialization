@@ -15,7 +15,7 @@ struct Socket
     GEN_METADATA(address, port, state);
 };
 
-int main()
+int main(int argc, const char *argv[])
 {
     auto socket = YAML::LoadFile("../socket.yaml").as<Socket>();
 
