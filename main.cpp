@@ -12,7 +12,7 @@ struct Socket
     int port;
     std::string state;
 
-    GEN_METADATA(address, port, state)
+    GEN_METADATA(address, port, state);
 };
 
 int main()

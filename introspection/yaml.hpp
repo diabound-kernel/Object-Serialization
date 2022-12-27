@@ -10,14 +10,14 @@ namespace YAML
     template<typename Object>
     struct convert
     {
-        static Node encode(const Object &obj)
+        static Node encode(const Object& obj)
         {
             Node node;
             to_yaml(node, obj);
             return node;
         }
 
-        static bool decode(const Node &node, Object &obj)
+        static bool decode(const Node& node, Object& obj)
         {
             from_yaml(node, obj);
             return true;
@@ -34,7 +34,7 @@ namespace YAML
     }
 
     template<typename Field>
-    auto get_to(const Node &node, Field& field)
+    auto get_to(const Node& node, Field& field)
     {
         field = node.template as<Field>();
     }
