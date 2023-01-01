@@ -1,7 +1,7 @@
-cmake_minimum_required(VERSION 3.21)
+cmake_minimum_required(VERSION 3.18)
 project(Object_Serialization)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 
 include_directories(third-party/fmt/include/)
 include_directories(third-party/json/single_include/)
