@@ -5,48 +5,48 @@
 
 #include "metadata.hpp"
 
-namespace YAML
+namespace YAML {
+template<typename Object>
+struct convert
 {
-    template<typename Object>
-    struct convert
+    static Node encode(const Object &obj)
     {
-        static Node encode(const Object& obj)
-        {
-            Node node;
-            to_yaml(node, obj);
-            return node;
-        }
-
-        static bool decode(const Node& node, Object& obj)
-        {
-            from_yaml(node, obj);
-            return true;
-        }
-    };
-
-    template<typename Object>
-    void to_yaml(Node& node, const Object& obj)
-    {
-        metadata::forEachField(obj, [&](auto field)
-        {
-            node[std::get<0>(field)] = std::get<2>(field)(obj);
-        });
+        Node node;
+        to_yaml(node, obj);
+        return node;
     }
 
-    template<typename Field>
-    auto get_to(const Node& node, Field& field)
+    static bool decode(const Node &node, Object &obj)
     {
-        field = node.template as<Field>();
+        from_yaml(node, obj);
+        return true;
     }
+};
 
-    template<typename Object>
-    void from_yaml(const Node& node, Object& obj)
-    {
-        metadata::forEachField(obj, [&](auto field)
-        {
-            get_to(node[std::get<0>(field)], std::get<1>(field));
-        });
-    }
-} // namespace YAML
+template<typename Object>
+void to_yaml(Node &node, const Object &obj)
+{
+    metadata::forEachField(obj, [&](auto field) {
+        node[std::get<metadata::Field::Name>(field)] =
+            std::get<metadata::Field::Invoke>(field)(obj);
+    });
+}
 
-#endif // YAML_HPP
+template<typename Field>
+auto get_to(const Node &node, Field &field)
+{
+    field = node.template as<Field>();
+}
+
+template<typename Object>
+void from_yaml(const Node &node, Object &obj)
+{
+    metadata::forEachField(obj, [&](auto field) {
+        get_to(
+            node[std::get<metadata::Field::Name>(field)],
+            std::get<metadata::Field::Ref>(field));
+    });
+}
+}  // namespace YAML
+
+#endif  // YAML_HPP

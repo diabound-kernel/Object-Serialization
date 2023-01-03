@@ -15,4 +15,4 @@
     macro(al) __VA_OPT__(FOR_EACH_AGAIN PARENS(macro, __VA_ARGS__))
 #define FOR_EACH_AGAIN() FOR_EACH_HELPER
 
-#endif // MACROS_HPP
+#endif  // MACROS_HPP

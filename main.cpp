@@ -1,11 +1,10 @@
-#define FMT_HEADER_ONLY
+#include <cstdint>
+#include <string>
+
 #include "fmt/ostream.h"
 
 #include "introspection/json.hpp"
 #include "introspection/yaml.hpp"
-
-#include <cstdint>
-#include <string>
 
 struct Socket
 {
